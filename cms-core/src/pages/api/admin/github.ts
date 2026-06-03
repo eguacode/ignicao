@@ -94,6 +94,7 @@ export const POST: APIRoute = async ({ request }) => {
         const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
         const GITHUB_OWNER = import.meta.env.GITHUB_OWNER;
         const GITHUB_REPO = import.meta.env.GITHUB_REPO;
+        const GITHUB_BASE_DIR = import.meta.env.GITHUB_BASE_DIR || 'cms-core';
 
         // Modo dev: sem credenciais GitHub → usa filesystem local
         if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
@@ -106,7 +107,9 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         const repo = `${GITHUB_OWNER}/${GITHUB_REPO}`;
-        const githubUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        const fullPath = GITHUB_BASE_DIR ? `${GITHUB_BASE_DIR}/${cleanPath}` : cleanPath;
+        const githubUrl = `https://api.github.com/repos/${repo}/contents/${fullPath}`;
         const headers: Record<string, string> = {
             Authorization: `Bearer ${GITHUB_TOKEN}`,
             Accept: 'application/vnd.github+json',
