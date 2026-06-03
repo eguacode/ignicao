@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { readData } from '../lib/readData';
+const termsData = readData('terms.json');
+---
+
+<BaseLayout title={termsData.title} description={`Leia os ${termsData.title.toLowerCase()} do nosso serviço.`}>
+
+  <section class="bg-slate-900 py-16 md:py-24 border-t border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">{termsData.title}</h1>
+      <nav class="flex justify-center items-center gap-2 text-sm text-slate-400 font-medium">
+        <a href="/" class="hover:text-orange-500 transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-slate-200">{termsData.title}</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-slate-200/50 border border-slate-100">
+        
+        {termsData.lastUpdated && (
+          <div class="mb-10 pb-6 border-b border-slate-100 flex items-center justify-between">
+            <span class="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-widest rounded-full">Políticas Legais</span>
+            <span class="text-sm text-slate-500 font-medium">Última atualização: {termsData.lastUpdated}</span>
+          </div>
+        )}
+
+        <div class="prose prose-slate prose-orange lg:prose-lg max-w-none prose-headings:font-bold prose-h4:text-xl prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline">
+          {termsData.content?.map((section: any) => (
+            <>
+              <h4>{section.title}</h4>
+              <p>{section.text}</p>
+            </>
+          ))}
+
+          <hr class="my-8 border-slate-100" />
+          <p>Para dúvidas sobre estes termos, entre em <a href="/contato" class="font-bold">contato conosco</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

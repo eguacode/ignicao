@@ -1,0 +1,8 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import BannersEditor from '../../components/admin/BannersEditor';
+---
+<AdminLayout title="Banners da Equipe" activeSection="banners">
+    <BannersEditor client:load />
+</AdminLayout>

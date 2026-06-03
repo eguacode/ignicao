@@ -1,0 +1,66 @@
+---
+/**
+ * RelatedPosts.astro — Plugin Related Posts
+ *
+ * Exibe posts relacionados por categoria após o author box.
+ * Filtra por mesma categoria, exclui post atual, embaralha e limita.
+ */
+import { getCollection } from 'astro:content';
+import { readData } from '../../lib/readData';
+import { postUrl } from '../../lib/blogRoutes';
+
+interface Props {
+  currentSlug: string;
+  category: string;
+  count?: number;
+}
+
+const { currentSlug, category, count } = Astro.props;
+
+const pluginsConfig = readData('pluginsConfig.json', {}) as any;
+const relatedConfig = pluginsConfig?.relatedPosts;
+const enabled = relatedConfig?.enabled !== false;
+const maxCount = count ?? relatedConfig?.count ?? 3;
+
+let relatedPosts: any[] = [];
+
+if (enabled && category) {
+  const allPosts = await getCollection('blog');
+  const filtered = allPosts.filter(p =>
+    p.slug !== currentSlug &&
+    p.data.category === category &&
+    !p.data.draft
+  );
+
+  // Shuffle
+  for (let i = filtered.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+  }
+
+  relatedPosts = filtered.slice(0, maxCount);
+}
+---
+
+{enabled && relatedPosts.length > 0 && (
+  <div class="mt-16 pt-12 border-t border-slate-200">
+    <h3 class="text-2xl font-extrabold text-slate-900 mb-8">Artigos Relacionados</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {relatedPosts.map(post => {
+        return (
+          <a href={postUrl(post.slug)} class="group block bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300">
+            {post.data.heroImage && (
+              <div class="aspect-video w-full overflow-hidden border-b border-slate-100">
+                <img src={post.data.heroImage} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+            )}
+            <div class="p-5">
+              <h4 class="font-bold text-slate-900 group-hover:text-orange-600 transition-colors line-clamp-2 mb-2">{post.data.title}</h4>
+              <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed">{post.data.description}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+)}
