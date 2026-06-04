@@ -15,4 +15,7 @@ export default defineConfig({
             include: ['marked'],
         },
     },
+    image: {
+        domains: ['images.unsplash.com', 'unsplash.com', 'localhost'],
+    },
 });
