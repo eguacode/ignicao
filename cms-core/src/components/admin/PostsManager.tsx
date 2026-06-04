@@ -56,9 +56,9 @@ export default function PostsManager() {
                 const enriched: any[] = [];
                 await Promise.all(mdFiles.map(async (f: any) => {
                     const fileData = await githubApi('read', f.path).catch(() => null);
-                    if (!fileData) return;
-                    const text = fileData.content || '';
-                    const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+                    const text = fileData?.content || '';
+                    // Regex atualizada para suportar \r\n (CRLF) e \n
+                    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
                     let title = f.name, category = 'Geral', author = '', pubDate = '', draft = false, description = '', heroImage = '';
                     const slug = f.name.replace('.md', '');
                     if (match) {
@@ -67,7 +67,7 @@ export default function PostsManager() {
                         title = extract('title') || f.name; category = extract('category') || 'Geral'; author = extract('author'); pubDate = extract('pubDate'); draft = extract('draft') === 'true'; description = extract('description'); heroImage = extract('heroImage');
                         if (category) allCategories.add(category);
                     }
-                    enriched.push({ ...f, sha: fileData.sha || f.sha, title, category, author, pubDate, draft, description, heroImage, slug, rawBody: match ? match[2] : text });
+                    enriched.push({ ...f, sha: fileData?.sha || f.sha || '', title, category, author, pubDate, draft, description, heroImage, slug, rawBody: match ? match[2] : text, readError: !fileData });
                 }));
 
                 setPosts(enriched);
