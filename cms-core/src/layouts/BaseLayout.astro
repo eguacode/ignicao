@@ -2,9 +2,12 @@
 import BaseSEO from "../components/BaseSEO.astro";
 import "../styles/global.css";
 import { Image } from "astro:assets";
-import logoImg from "../assets/logo-ignicao.png";
 import HeadPlugins from '../plugins/_slots/HeadPlugins.astro';
 import BodyEndPlugins from '../plugins/_slots/BodyEndPlugins.astro';
+import { readData } from "../lib/readData";
+
+const siteConfig = readData('siteConfig.json', {});
+const logoSrc = siteConfig.logo || "/images/about.png";
 
 interface Props {
   title: string;
@@ -37,10 +40,10 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
       >
         <!-- Logo Otimizada no Header -->
         <a href="/" class="flex items-center">
-          <Image
-            src={logoImg}
-            alt="Logo Comunidade Ignição - Mentoria e Marketing de Rede"
-            width={180}
+          <img
+            src={logoSrc}
+            alt={siteConfig.name || "Logo do Site"}
+            class="h-10 w-auto"
             loading="eager"
           />
         </a>
@@ -165,11 +168,10 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
         <div class="col-span-1 md:col-span-2">
           <!-- Logo Otimizada no Footer -->
           <a href="/" class="flex items-center mb-4">
-            <Image
-              src={logoImg}
-              alt="Logo Comunidade Ignição - Mentoria e Marketing de Rede"
-              width={140}
-              class="brightness-0 invert opacity-90"
+            <img
+              src={logoSrc}
+              alt={siteConfig.name || "Logo do Site"}
+              class="h-12 w-auto brightness-0 invert opacity-90"
             />
           </a>
           <p class="text-slate-400 max-w-md">

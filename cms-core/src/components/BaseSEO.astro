@@ -12,11 +12,15 @@ const {
   image = '/social-image.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url),
 } = Astro.props;
+import { readData } from "../lib/readData";
+const siteConfig = readData('siteConfig.json', {});
+const faviconSrc = siteConfig.favicon || "/favicon.svg";
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href={faviconSrc} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

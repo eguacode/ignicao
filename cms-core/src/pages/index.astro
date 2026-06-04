@@ -22,6 +22,7 @@ const heroConfig = readData('hero.json', {
   image: "/images/hero.png"
 });
 
+const siteConfig = readData('siteConfig.json', {});
 const bannersConfig = readData('banners.json', []);
 
 const homeConfig = readData('home.json', {
@@ -169,7 +170,7 @@ if (inspirationPosts.length === 0) inspirationPosts.push(...publishedPosts.slice
             class="bg-slate-950 rounded-3xl p-8 sm:p-12 flex items-center justify-center shadow-xl border border-slate-800/50 aspect-square w-full"
           >
             <OptimizedImage
-              src="/images/about.png"
+              src={siteConfig.logo || "/images/about.png"}
               alt="Logo Comunidade Ignição"
               class="w-full h-auto max-w-[340px] object-contain"
             />
