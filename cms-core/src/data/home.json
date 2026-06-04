@@ -1,8 +1,36 @@
 {
     "sectionTitles": {
+        "editorsPick": "Fundamentos: O Método Ignição",
+        "trending": "Processos e Rotina",
+        "inspiration": "Sem Palcos, Só Resultados",
         "latestPosts": "Posts Recentes",
         "popularTab": "Popular",
         "recentTab": "Recente"
+    },
+    "editorsPick": {
+        "mainSlug": "",
+        "sideSlugs": [
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "trending": {
+        "slugs": [
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "inspiration": {
+        "slugs": [
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "latestPosts": {
         "limit": 6,
