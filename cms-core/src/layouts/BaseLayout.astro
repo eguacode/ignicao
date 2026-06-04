@@ -43,7 +43,7 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
           <img
             src={logoSrc}
             alt={siteConfig.name || "Logo do Site"}
-            class="h-12 sm:h-16 w-auto"
+            class="w-[150px] sm:w-[180px] h-auto max-h-16 object-contain"
             loading="eager"
           />
         </a>
@@ -171,7 +171,7 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
             <img
               src={logoSrc}
               alt={siteConfig.name || "Logo do Site"}
-              class="h-16 sm:h-20 w-auto brightness-0 invert opacity-90"
+              class="w-[140px] h-auto object-contain brightness-0 invert opacity-90"
             />
           </a>
           <p class="text-slate-400 max-w-md">
