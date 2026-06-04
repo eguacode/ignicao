@@ -43,7 +43,7 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
           <img
             src={logoSrc}
             alt={siteConfig.name || "Logo do Site"}
-            class="h-10 w-auto"
+            class="h-12 sm:h-16 w-auto"
             loading="eager"
           />
         </a>
@@ -167,11 +167,11 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
       >
         <div class="col-span-1 md:col-span-2">
           <!-- Logo Otimizada no Footer -->
-          <a href="/" class="flex items-center mb-4">
+          <a href="/" class="flex items-center mb-6">
             <img
               src={logoSrc}
               alt={siteConfig.name || "Logo do Site"}
-              class="h-12 w-auto brightness-0 invert opacity-90"
+              class="h-16 sm:h-20 w-auto brightness-0 invert opacity-90"
             />
           </a>
           <p class="text-slate-400 max-w-md">
