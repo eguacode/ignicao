@@ -18,4 +18,7 @@ export default defineConfig({
     image: {
         domains: ['images.unsplash.com', 'unsplash.com', 'localhost'],
     },
+    build: {
+        inlineStylesheets: 'always',
+    },
 });
