@@ -206,6 +206,16 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                 theme="snow"
                                 value={post.content}
                                 onChange={(val: string) => setPost(p => ({ ...p, content: val }))}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': [1, 2, 3, 4, false] }],
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        ['blockquote', 'code-block'],
+                                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                        ['link', 'image'],
+                                        ['clean']
+                                    ]
+                                }}
                                 style={{ minHeight: '300px' }}
                             />
                         ) : (
