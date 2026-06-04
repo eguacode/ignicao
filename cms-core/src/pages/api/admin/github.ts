@@ -28,10 +28,12 @@ function setCache(key: string, data: any) {
 }
 
 function invalidateCache(path: string) {
-    // Invalida o arquivo e o diretório pai
-    readCache.delete(path);
+    // Invalida o arquivo e o diretório pai para as ações 'read' e 'list'
+    readCache.delete(`read:${path}`);
+    readCache.delete(`list:${path}`);
     const dir = path.split('/').slice(0, -1).join('/');
-    readCache.delete(dir);
+    readCache.delete(`read:${dir}`);
+    readCache.delete(`list:${dir}`);
 }
 
 /** Modo dev: lê/escreve arquivos locais sem precisar do GitHub */
@@ -139,7 +141,14 @@ export const POST: APIRoute = async ({ request }) => {
                 }
                 const data = await res.json();
                 if (Array.isArray(data)) {
-                    const result = { data };
+                    // Remove GITHUB_BASE_DIR from paths so frontend receives relative paths
+                    const sanitizedData = data.map((item: any) => {
+                        if (GITHUB_BASE_DIR && item.path && item.path.startsWith(`${GITHUB_BASE_DIR}/`)) {
+                            return { ...item, path: item.path.slice(GITHUB_BASE_DIR.length + 1) };
+                        }
+                        return item;
+                    });
+                    const result = { data: sanitizedData };
                     setCache(cacheKey, result);
                     return new Response(JSON.stringify(result), { status: 200 });
                 }
