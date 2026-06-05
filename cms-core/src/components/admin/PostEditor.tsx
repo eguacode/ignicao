@@ -40,46 +40,7 @@ export default function PostEditor({ filePath }: PostEditorProps) {
 
     // Load Quill dynamically
     useEffect(() => {
-        import('react-quill-new').then(mod => {
-            const ReactQuill = mod.default;
-            const Quill = ReactQuill.Quill;
-            if (Quill) {
-                const BlockEmbed = Quill.import('blots/block/embed');
-                class CtaBoxEmbed extends BlockEmbed {
-                    static create(value: any) {
-                        let node = super.create();
-                        node.setAttribute('class', 'not-prose cta-embed-box relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 sm:p-10 my-10 shadow-2xl text-center text-white border-4 border-orange-200/20 transform hover:-translate-y-1 transition-all duration-300');
-                        node.setAttribute('contenteditable', 'false');
-                        const safeTitle = (value.title || 'Chamada').replace(/[\r\n]+/g, '<br/>');
-                        const safeSubtitle = (value.subtitle || 'Subtítulo').replace(/[\r\n]+/g, '<br/>');
-                        
-                        node.setAttribute('data-title', (value.title || '').replace(/[\r\n]+/g, ' '));
-                        node.setAttribute('data-subtitle', (value.subtitle || '').replace(/[\r\n]+/g, ' '));
-                        node.setAttribute('data-link', value.link || '#');
-                        node.setAttribute('data-button', value.button || 'Clique Aqui');
-                        
-                        node.innerHTML = `
-                            <h3 class="cta-embed-title">${safeTitle}</h3>
-                            <p class="cta-embed-subtitle">${safeSubtitle}</p>
-                            <a href="${value.link || '#'}" class="cta-embed-button">${value.button || 'Acessar'}</a>
-                        `;
-                        return node;
-                    }
-                    static value(node: any) {
-                        return {
-                            title: node.getAttribute('data-title'),
-                            subtitle: node.getAttribute('data-subtitle'),
-                            link: node.getAttribute('data-link'),
-                            button: node.getAttribute('data-button')
-                        };
-                    }
-                }
-                CtaBoxEmbed.blotName = 'ctaBoxEmbed';
-                CtaBoxEmbed.tagName = 'div';
-                Quill.register(CtaBoxEmbed, true);
-            }
-            setQuillEditor(() => ReactQuill);
-        });
+        import('react-quill-new').then(mod => setQuillEditor(() => mod.default));
         import('react-quill-new/dist/quill.snow.css' as any);
     }, []);
 
@@ -246,36 +207,14 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                 value={post.content}
                                 onChange={(val: string) => setPost(p => ({ ...p, content: val }))}
                                 modules={{
-                                    toolbar: {
-                                        container: [
-                                            [{ 'header': [1, 2, 3, 4, false] }],
-                                            ['bold', 'italic', 'underline', 'strike'],
-                                            ['blockquote', 'code-block'],
-                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                            ['link', 'image', 'ctaBoxEmbed'],
-                                            ['clean']
-                                        ],
-                                        handlers: {
-                                            ctaBoxEmbed: function() {
-                                                const quill = (this as any).quill;
-                                                const range = quill.getSelection(true);
-                                                
-                                                const title = prompt("Digite a Headline (Título Principal):", "Transforme seus resultados hoje!");
-                                                if (!title) return;
-                                                const subtitle = prompt("Digite a Subheadline (Texto de apoio):", "Junte-se à nossa mentoria exclusiva e aprenda o passo a passo com especialistas.");
-                                                if (!subtitle) return;
-                                                const button = prompt("Digite o texto do Botão:", "Quero Participar");
-                                                if (!button) return;
-                                                const link = prompt("Digite o Link do botão (URL):", "https://wa.me/5591981992265");
-                                                if (!link) return;
-
-                                                quill.insertEmbed(range.index, 'ctaBoxEmbed', {
-                                                    title, subtitle, button, link
-                                                }, 'user');
-                                                quill.setSelection(range.index + 1);
-                                            }
-                                        }
-                                    }
+                                    toolbar: [
+                                        [{ 'header': [1, 2, 3, 4, false] }],
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        ['blockquote', 'code-block'],
+                                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                        ['link', 'image'],
+                                        ['clean']
+                                    ]
                                 }}
                                 style={{ minHeight: '300px' }}
                             />
