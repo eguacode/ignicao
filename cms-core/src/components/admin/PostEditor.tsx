@@ -50,14 +50,17 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                         let node = super.create();
                         node.setAttribute('class', 'not-prose cta-embed-box relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 sm:p-10 my-10 shadow-2xl text-center text-white border-4 border-orange-200/20 transform hover:-translate-y-1 transition-all duration-300');
                         node.setAttribute('contenteditable', 'false');
-                        node.setAttribute('data-title', value.title || '');
-                        node.setAttribute('data-subtitle', value.subtitle || '');
+                        const safeTitle = (value.title || 'Chamada').replace(/\n/g, '<br/>');
+                        const safeSubtitle = (value.subtitle || 'Subtítulo').replace(/\n/g, '<br/>');
+                        
+                        node.setAttribute('data-title', (value.title || '').replace(/\n/g, ' '));
+                        node.setAttribute('data-subtitle', (value.subtitle || '').replace(/\n/g, ' '));
                         node.setAttribute('data-link', value.link || '#');
                         node.setAttribute('data-button', value.button || 'Clique Aqui');
                         
                         node.innerHTML = `
-                            <h3 class="cta-embed-title">${value.title || 'Chamada'}</h3>
-                            <p class="cta-embed-subtitle">${value.subtitle || 'Subtítulo'}</p>
+                            <h3 class="cta-embed-title">${safeTitle}</h3>
+                            <p class="cta-embed-subtitle">${safeSubtitle}</p>
                             <a href="${value.link || '#'}" class="cta-embed-button">${value.button || 'Acessar'}</a>
                         `;
                         return node;
