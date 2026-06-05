@@ -2,7 +2,7 @@
 title: "A Ilusão do Contracheque: Como Iniciar Sua Transição Sem Atitudes Irresponsáveis"
 description: "O contracheque virou uma algema? Descubra como fazer sua transição para o marketing de rede com inteligência e segurança, sem cair em falsas promessas."
 pubDate: "2026-06-05"
-heroImage: ""
+heroImage: "/uploads/1780621300247-blog-cover.jpeg"
 category: "Mentalidade"
 author: "Ignição"
 draft: false
