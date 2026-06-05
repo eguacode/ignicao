@@ -40,7 +40,25 @@ export default function PostEditor({ filePath }: PostEditorProps) {
 
     // Load Quill dynamically
     useEffect(() => {
-        import('react-quill-new').then(mod => setQuillEditor(() => mod.default));
+        import('react-quill-new').then(mod => {
+            const ReactQuill = mod.default;
+            const Quill = ReactQuill.Quill;
+            if (Quill) {
+                const Block = Quill.import('blots/block');
+                class CtaBox extends Block {
+                    static create() {
+                        let node = super.create();
+                        node.setAttribute('class', 'cta-box');
+                        return node;
+                    }
+                }
+                CtaBox.blotName = 'ctaBox';
+                CtaBox.tagName = 'blockquote';
+                CtaBox.className = 'cta-box';
+                Quill.register(CtaBox, true);
+            }
+            setQuillEditor(() => ReactQuill);
+        });
         import('react-quill-new/dist/quill.snow.css' as any);
     }, []);
 
@@ -207,14 +225,26 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                 value={post.content}
                                 onChange={(val: string) => setPost(p => ({ ...p, content: val }))}
                                 modules={{
-                                    toolbar: [
-                                        [{ 'header': [1, 2, 3, 4, false] }],
-                                        ['bold', 'italic', 'underline', 'strike'],
-                                        ['blockquote', 'code-block'],
-                                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                        ['link', 'image'],
-                                        ['clean']
-                                    ]
+                                    toolbar: {
+                                        container: [
+                                            [{ 'header': [1, 2, 3, 4, false] }],
+                                            ['bold', 'italic', 'underline', 'strike'],
+                                            ['blockquote', 'code-block'],
+                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                            ['link', 'image', 'ctaBox'],
+                                            ['clean']
+                                        ],
+                                        handlers: {
+                                            ctaBox: function() {
+                                                const quill = (this as any).quill;
+                                                const range = quill.getSelection();
+                                                if (range) {
+                                                    quill.insertText(range.index, "🔥 CHAMADA PARA AÇÃO\nSubstitua por seu título e texto. Selecione este bloco e adicione seu link.", "bold", true);
+                                                    quill.formatLine(range.index, 1, 'ctaBox', true);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }}
                                 style={{ minHeight: '300px' }}
                             />
