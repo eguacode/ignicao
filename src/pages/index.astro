@@ -389,9 +389,12 @@ const publishedPosts = allPosts
                       alt={post.data.title}
                       class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div class="absolute top-4 left-4">
+                    {/* Overlay escuro para melhorar a leitura */}
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500"></div>
+                    
+                    <div class="absolute top-4 left-4 z-10">
                       {post.data.tags[0] && (
-                        <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                        <span class="bg-orange-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-orange-600/50 [text-shadow:_0_1px_2px_rgb(0_0_0_/_60%)] backdrop-blur-sm">
                           {post.data.tags[0]}
                         </span>
                       )}
