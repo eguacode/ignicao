@@ -22,7 +22,15 @@ interface Check {
 }
 
 function countWords(html: string): number {
-  const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!html) return 0;
+  // Remove style/script content
+  let text = html.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, ' ');
+  // Remove HTML tags
+  text = text.replace(/<[^>]+>/g, ' ');
+  // Replace non-breaking spaces and other entities
+  text = text.replace(/&nbsp;/gi, ' ').replace(/&[a-zA-Z0-9#]+;/g, ' ');
+  // Normalize whitespaces
+  text = text.replace(/\s+/g, ' ').trim();
   return text ? text.split(' ').length : 0;
 }
 
