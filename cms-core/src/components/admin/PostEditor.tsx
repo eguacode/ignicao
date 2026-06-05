@@ -44,18 +44,36 @@ export default function PostEditor({ filePath }: PostEditorProps) {
             const ReactQuill = mod.default;
             const Quill = ReactQuill.Quill;
             if (Quill) {
-                const Block = Quill.import('blots/block');
-                class CtaBox extends Block {
-                    static create() {
+                const BlockEmbed = Quill.import('blots/block/embed');
+                class CtaBoxEmbed extends BlockEmbed {
+                    static create(value: any) {
                         let node = super.create();
-                        node.setAttribute('class', 'cta-box');
+                        node.setAttribute('class', 'cta-embed-box relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 sm:p-10 my-10 shadow-2xl text-center text-white border-4 border-orange-200/20 transform hover:-translate-y-1 transition-all duration-300');
+                        node.setAttribute('contenteditable', 'false');
+                        node.setAttribute('data-title', value.title || '');
+                        node.setAttribute('data-subtitle', value.subtitle || '');
+                        node.setAttribute('data-link', value.link || '#');
+                        node.setAttribute('data-button', value.button || 'Clique Aqui');
+                        
+                        node.innerHTML = `
+                            <h3 class="block text-2xl sm:text-3xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md mt-0">${value.title || 'Chamada'}</h3>
+                            <p class="text-orange-100 text-lg mb-6">${value.subtitle || 'Subtítulo'}</p>
+                            <a href="${value.link || '#'}" class="inline-block mt-2 px-8 py-4 bg-white text-orange-600 font-bold rounded-full shadow-xl hover:bg-slate-50 hover:shadow-orange-900/20 transform hover:-translate-y-1 transition-all no-underline text-lg">${value.button || 'Acessar'}</a>
+                        `;
                         return node;
                     }
+                    static value(node: any) {
+                        return {
+                            title: node.getAttribute('data-title'),
+                            subtitle: node.getAttribute('data-subtitle'),
+                            link: node.getAttribute('data-link'),
+                            button: node.getAttribute('data-button')
+                        };
+                    }
                 }
-                CtaBox.blotName = 'ctaBox';
-                CtaBox.tagName = 'blockquote';
-                CtaBox.className = 'cta-box';
-                Quill.register(CtaBox, true);
+                CtaBoxEmbed.blotName = 'ctaBoxEmbed';
+                CtaBoxEmbed.tagName = 'div';
+                Quill.register(CtaBoxEmbed, true);
             }
             setQuillEditor(() => ReactQuill);
         });
@@ -231,17 +249,27 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                             ['bold', 'italic', 'underline', 'strike'],
                                             ['blockquote', 'code-block'],
                                             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                            ['link', 'image', 'ctaBox'],
+                                            ['link', 'image', 'ctaBoxEmbed'],
                                             ['clean']
                                         ],
                                         handlers: {
-                                            ctaBox: function() {
+                                            ctaBoxEmbed: function() {
                                                 const quill = (this as any).quill;
-                                                const range = quill.getSelection();
-                                                if (range) {
-                                                    quill.insertText(range.index, "🔥 CHAMADA PARA AÇÃO\nSubstitua por seu título e texto. Selecione este bloco e adicione seu link.", "bold", true);
-                                                    quill.formatLine(range.index, 1, 'ctaBox', true);
-                                                }
+                                                const range = quill.getSelection(true);
+                                                
+                                                const title = prompt("Digite a Headline (Título Principal):", "Transforme seus resultados hoje!");
+                                                if (!title) return;
+                                                const subtitle = prompt("Digite a Subheadline (Texto de apoio):", "Junte-se à nossa mentoria exclusiva e aprenda o passo a passo com especialistas.");
+                                                if (!subtitle) return;
+                                                const button = prompt("Digite o texto do Botão:", "Quero Participar");
+                                                if (!button) return;
+                                                const link = prompt("Digite o Link do botão (URL):", "https://wa.me/5591981992265");
+                                                if (!link) return;
+
+                                                quill.insertEmbed(range.index, 'ctaBoxEmbed', {
+                                                    title, subtitle, button, link
+                                                }, 'user');
+                                                quill.setSelection(range.index + 1);
                                             }
                                         }
                                     }
