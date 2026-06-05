@@ -210,6 +210,7 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                     toolbar: [
                                         [{ 'header': [1, 2, 3, 4, false] }],
                                         ['bold', 'italic', 'underline', 'strike'],
+                                        [{ 'color': [] }, { 'background': [] }],
                                         [{ 'align': [] }],
                                         ['blockquote', 'code-block'],
                                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
