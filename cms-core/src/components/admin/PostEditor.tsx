@@ -48,7 +48,7 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                 class CtaBoxEmbed extends BlockEmbed {
                     static create(value: any) {
                         let node = super.create();
-                        node.setAttribute('class', 'cta-embed-box relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 sm:p-10 my-10 shadow-2xl text-center text-white border-4 border-orange-200/20 transform hover:-translate-y-1 transition-all duration-300');
+                        node.setAttribute('class', 'not-prose cta-embed-box relative overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 sm:p-10 my-10 shadow-2xl text-center text-white border-4 border-orange-200/20 transform hover:-translate-y-1 transition-all duration-300');
                         node.setAttribute('contenteditable', 'false');
                         node.setAttribute('data-title', value.title || '');
                         node.setAttribute('data-subtitle', value.subtitle || '');
