@@ -1,7 +1,7 @@
 ---
 title: "Como Atrair Pessoas para o Seu Negócio Sem Ser o Chato da Família"
 description: "Você não precisa ser chato para construir uma equipe no marketing de rede. Como processos simples e funis inteligentes deixam o sistema trabalhar por você"
-pubDate: "2026-06-05"
+pubDate: "2026-06-03"
 heroImage: "/uploads/1780632335789-blog-cover.jpeg"
 category: "Recrutamento"
 author: "Ignição"
