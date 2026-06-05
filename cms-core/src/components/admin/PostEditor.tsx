@@ -56,9 +56,9 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                         node.setAttribute('data-button', value.button || 'Clique Aqui');
                         
                         node.innerHTML = `
-                            <h3 class="block text-2xl sm:text-3xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md mt-0">${value.title || 'Chamada'}</h3>
-                            <p class="text-orange-100 text-lg mb-6">${value.subtitle || 'Subtítulo'}</p>
-                            <a href="${value.link || '#'}" class="inline-block mt-2 px-8 py-4 bg-white text-orange-600 font-bold rounded-full shadow-xl hover:bg-slate-50 hover:shadow-orange-900/20 transform hover:-translate-y-1 transition-all no-underline text-lg">${value.button || 'Acessar'}</a>
+                            <h3 class="cta-embed-title">${value.title || 'Chamada'}</h3>
+                            <p class="cta-embed-subtitle">${value.subtitle || 'Subtítulo'}</p>
+                            <a href="${value.link || '#'}" class="cta-embed-button">${value.button || 'Acessar'}</a>
                         `;
                         return node;
                     }
