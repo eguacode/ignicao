@@ -8,6 +8,9 @@ interface Props {
   class?: string;
   width?: number;
   height?: number;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  [key: string]: any;
 }
 
 const { src, alt, class: className, width, height, ...props } = Astro.props;

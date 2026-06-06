@@ -116,6 +116,8 @@ if (inspirationPosts.length === 0) inspirationPosts.push(...publishedPosts.slice
               src={heroConfig.image}
               alt={heroConfig.titleHighlight}
               class="w-full h-auto object-cover"
+              loading="eager"
+              fetchpriority="high"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"
