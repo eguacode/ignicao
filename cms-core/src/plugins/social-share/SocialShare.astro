@@ -42,17 +42,17 @@ const activePlatforms = platforms.filter(p => platformDefs[p]);
       <p class="walker-share-title">{sectionTitle}</p>
     )}
     <ul
-      class="social-icons list-unstyled list-inline mb-0 walker-share-list"
+      class="social-icons flex flex-wrap gap-2 m-0 p-0 list-none walker-share-list"
       data-style={style}
     >
       {activePlatforms.map(p => {
         const def = platformDefs[p];
         return (
-          <li class="list-inline-item" data-platform={p}>
-            <a href="#" class="walker-share-btn" aria-label={`Compartilhar no ${def.label}`} title={def.label}>
+          <li class="flex items-center" data-platform={p}>
+            <a href="#" class="walker-share-btn w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-orange-100 hover:text-orange-600 transition-colors shadow-sm" aria-label={`Compartilhar no ${def.label}`} title={def.label}>
               <i class={def.icon}></i>
               {(style === 'label' || style === 'both') && (
-                <span class="share-label ms-1">{def.label}</span>
+                <span class="share-label ms-1 text-sm font-medium">{def.label}</span>
               )}
             </a>
           </li>
