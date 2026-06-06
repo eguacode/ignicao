@@ -2,6 +2,7 @@
 import BaseSEO from "../components/BaseSEO.astro";
 import "../styles/global.css";
 import { Image } from "astro:assets";
+import OptimizedImage from "../components/ui/OptimizedImage.astro";
 import HeadPlugins from '../plugins/_slots/HeadPlugins.astro';
 import BodyEndPlugins from '../plugins/_slots/BodyEndPlugins.astro';
 import { readData } from "../lib/readData";
@@ -41,11 +42,13 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
       >
         <!-- Logo Otimizada no Header -->
         <a href="/" class="flex items-center">
-          <img
+          <OptimizedImage
             src={logoSrc}
             alt={siteConfig.name || "Logo do Site"}
             class="w-[150px] sm:w-[180px] h-auto max-h-16 object-contain"
             loading="eager"
+            fetchpriority="high"
+            width={360}
           />
         </a>
 
@@ -169,10 +172,12 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
         <div class="col-span-1 md:col-span-2">
           <!-- Logo Otimizada no Footer -->
           <a href="/" class="flex items-center mb-6">
-            <img
+            <OptimizedImage
               src={logoSrc}
               alt={siteConfig.name || "Logo do Site"}
               class="w-[140px] h-auto object-contain brightness-0 invert opacity-90"
+              width={280}
+              loading="lazy"
             />
           </a>
           <p class="text-slate-400 max-w-md">
