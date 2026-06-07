@@ -30,5 +30,13 @@
   },
   "phone": "",
   "address": "",
-  "favicon": "/favicon.png"
+  "favicon": "/favicon.png",
+  "footer": {
+    "description": "<strong class=\"text-orange-400\">Ative sua melhor versão!</strong> Nossa comunidade conecta talentos a mentores de alto impacto, acelerando carreiras e construindo negócios de sucesso.",
+    "copyright": "Comunidade Ignição"
+  },
+  "seo": {
+    "title": "Comunidade Ignição | Marketing de Rede",
+    "description": "Sistema de recrutamento de marketing de rede 100% gratuito e integrado com: landing pages, CRM, automação, funil de whatsapp, gestão e mais para você e sua equipe."
+  }
 }
