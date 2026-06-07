@@ -40,7 +40,7 @@ const posts = (await getCollection('blog')).sort(
                   <div class="w-full h-48 bg-gray-100"></div>
                 )}
                 {post.data.category && (
-                  <span class="category-badge absolute top-3 left-3">{post.data.category}</span>
+                  <span class="absolute top-3 left-3 z-10 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm uppercase tracking-wider">{post.data.category}</span>
                 )}
               </a>
               <div class="p-5">
