@@ -1,7 +1,4 @@
 {
-    "googleAnalytics": {
-        "measurementId": ""
-    },
     "metaPixel": {
         "pixelId": ""
     },
@@ -92,5 +89,10 @@
             "position": 3
         },
         "sequences": []
+    },
+    "googleTag": {
+        "tags": [
+            "G-T8T9SQMG3Z"
+        ]
     }
 }
