@@ -12,10 +12,13 @@ export async function getStaticPaths() {
   const categoriesFromPosts = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
   const allCategories = finalCategoriesData.length > 0 ? finalCategoriesData : categoriesFromPosts;
 
-  return allCategories.map(cat => ({
-    params: { categoria: cat.toLowerCase().replace(/[^a-z0-9]/g, '-') },
-    props: { categoryName: cat },
-  }));
+  return allCategories.map(cat => {
+    const slug = cat.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
+    return {
+      params: { categoria: slug },
+      props: { categoryName: cat },
+    };
+  });
 }
 
 const { categoryName } = Astro.props;
@@ -25,7 +28,7 @@ const allPosts = (await getCollection('blog')).sort(
 const posts = allPosts.filter(p =>
   (p.data.category || '').toLowerCase() === categoryName.toLowerCase()
 );
-const categorySlug = categoryName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+const categorySlug = categoryName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
 ---
 
 <BaseLayout title={categoryName} description={`Artigos sobre ${categoryName}`}>
