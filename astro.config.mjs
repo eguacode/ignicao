@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://seu-dominio-aqui.com',
+  site: 'https://www.comunidadeignicao.com.br',
   vite: {
     plugins: [tailwindcss()]
   },

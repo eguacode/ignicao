@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
+    site: 'https://www.comunidadeignicao.com.br',
     output: 'static',
     adapter: vercel(),
     integrations: [
