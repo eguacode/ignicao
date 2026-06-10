@@ -2,7 +2,7 @@
 title: "Por que o modelo tradicional de recrutamento está quebrado (e como a tecnologia resolve isso)"
 description: "Chega de ser o chato da família. Entenda por que o recrutamento tradicional quebrou e como usar a tecnologia para atrair contatos qualificados sem amadorismo."
 pubDate: "2026-06-04"
-heroImage: "blob:https://www.comunidadeignicao.com.br/76af050a-4b4c-4efd-93fc-b81b81737034"
+heroImage: "/uploads/1781059466483-mencuw.jpeg"
 category: "Recrutamento"
 author: "Ignição"
 draft: false

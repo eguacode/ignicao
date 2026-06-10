@@ -15,7 +15,7 @@ interface Props {
 
 const { src, alt, class: className, width, height, ...props } = Astro.props;
 
-let isRemote = typeof src === 'string' && (src.startsWith('http://') || src.startsWith('https://'));
+let isRemote = typeof src === 'string' && (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('blob:'));
 
 // Mapeia dinamicamente todas as imagens da pasta public para permitir otimização do Astro
 const images = import.meta.glob<{ default: ImageMetadata }>('/public/**/*.{jpeg,jpg,png,gif,webp,avif}');
