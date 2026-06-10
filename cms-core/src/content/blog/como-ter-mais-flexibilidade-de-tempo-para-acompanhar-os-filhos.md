@@ -2,7 +2,7 @@
 title: "Como ter mais flexibilidade de tempo para acompanhar os filhos?"
 description: "Saiba como ter mais flexibilidade de tempo para acompanhar os filhos. Empreenda no setor de saudabilidade e construa uma renda residual escalável."
 pubDate: "2026-06-11"
-heroImage: "/uploads/1781058475100-blog-cover.jpeg"
+heroImage: "blob:https://www.comunidadeignicao.com.br/c5909b7e-bc3e-408e-bdd4-5e37268703c5"
 category: "Marketing de Rede"
 author: "Ignição"
 draft: false
