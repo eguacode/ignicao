@@ -1,9 +1,10 @@
 ---
 title: "Página de Captura de Leads: Guia Completo para Criar e Otimizar"
 description: "Aprenda tudo sobre página de captura de leads, desde o que é, como criar, otimizar e aumentar suas conversões com estratégias eficazes."
-pubDate: "2026-06-06T02:39:32.884Z"
+pubDate: 2026-06-06T02:39:32.884Z
 heroImage: "https://images.pexels.com/photos/36085483/pexels-photo-36085483.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=650&amp;w=940"
 keyword: "página de captura de leads"
+tags: ["captura de leads", "marketing digital"]
 ---
 
 ## O que é uma Página de Captura de Leads?
