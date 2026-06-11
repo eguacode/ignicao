@@ -1,7 +1,9 @@
 ---
 title: "Página de Captura no Instagram: Como Criar e Otimizar para Converter Leads"
 description: "Aprenda tudo sobre página de captura no Instagram, desde a criação até estratégias avançadas para gerar leads e aumentar suas conversões."
-pubDate: "2026-06-06T03:06:26.232Z"
+pubDate: 2026-06-06T03:06:26.232Z
+heroImage: "https://images.pexels.com/photos/4065186/pexels-photo-4065186.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+tags: ["instagram", "captura de leads"]
 keyword: "página de captura no instagram"
 ---
 
