@@ -180,9 +180,7 @@ const { title, description, image, canonicalURL, type = 'website' } = Astro.prop
             />
           </a>
           <p class="text-slate-400 max-w-md">
-            <strong class="text-orange-400">Ative sua melhor versão!</strong> Nossa
-            comunidade conecta talentos a mentores de alto impacto, accelerating careers
-            and building successful businesses.
+            {siteConfig.footerDescription || "Conectando talentos a mentores de alto impacto."}
           </p>
         </div>
         <div>
