@@ -2,17 +2,23 @@
 import BaseSEO from "../components/BaseSEO.astro";
 import "../styles/global.css";
 import { Image } from "astro:assets";
-import logoImg from "../assets/logo-ignicao.png";
-import siteConfig from "../../cms-core/src/data/siteConfig.json";
+import OptimizedImage from "../components/ui/OptimizedImage.astro";
+import HeadPlugins from '../plugins/_slots/HeadPlugins.astro';
+import BodyEndPlugins from '../plugins/_slots/BodyEndPlugins.astro';
+import { readData } from "../lib/readData";
+
+const siteConfig = readData('siteConfig.json', {});
+const logoSrc = siteConfig.logo || "/images/about.png";
 
 interface Props {
   title: string;
   description: string;
   image?: string;
   canonicalURL?: string | URL;
+  type?: 'website' | 'article';
 }
 
-const { title, description, image, canonicalURL } = Astro.props;
+const { title, description, image, canonicalURL, type = 'website' } = Astro.props;
 ---
 
 <html lang="pt-br">
@@ -23,22 +29,25 @@ const { title, description, image, canonicalURL } = Astro.props;
       image={image}
       canonicalURL={canonicalURL}
     />
+    <HeadPlugins />
   </head>
   <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans">
     <!-- Header -->
     <header
-      class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm"
+      class="bg-white/90 backdrop-blur-md fixed w-full top-0 z-50 border-b border-slate-200 shadow-sm"
     >
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
       >
         <!-- Logo Otimizada no Header -->
         <a href="/" class="flex items-center">
-          <Image
-            src={logoImg}
-            alt="Logo Comunidade Ignição - Mentoria e Marketing de Rede"
-            width={180}
+          <OptimizedImage
+            src={logoSrc}
+            alt={siteConfig.name || "Logo do Site"}
+            class="w-[150px] sm:w-[180px] h-auto max-h-16 object-contain"
             loading="eager"
+            fetchpriority="high"
+            width={360}
           />
         </a>
 
@@ -82,22 +91,22 @@ const { title, description, image, canonicalURL } = Astro.props;
             >
               <div class="py-2">
                 <a
-                  href="/blog/categoria/recrutamento"
+                  href="/categoria/recrutamento"
                   class="block px-5 py-3 text-sm text-slate-600 hover:bg-orange-50 hover:text-orange-700 transition-colors border-b border-slate-50"
                   >Recrutamento</a
                 >
                 <a
-                  href="/blog/categoria/lideranca"
+                  href="/categoria/lideranca"
                   class="block px-5 py-3 text-sm text-slate-600 hover:bg-orange-50 hover:text-orange-700 transition-colors border-b border-slate-50"
                   >Liderança</a
                 >
                 <a
-                  href="/blog/categoria/vendas"
+                  href="/categoria/vendas"
                   class="block px-5 py-3 text-sm text-slate-600 hover:bg-orange-50 hover:text-orange-700 transition-colors border-b border-slate-50"
                   >Vendas</a
                 >
                 <a
-                  href="/blog/categoria/mentalidade"
+                  href="/categoria/mentalidade"
                   class="block px-5 py-3 text-sm text-slate-600 hover:bg-orange-50 hover:text-orange-700 transition-colors"
                   >Mentalidade</a
                 >
@@ -116,39 +125,39 @@ const { title, description, image, canonicalURL } = Astro.props;
           >
         </nav>
 
-        <!-- Actions -->
-        <div class="hidden md:flex items-center gap-4">
+        <!-- Actions & Mobile Menu -->
+        <div class="flex items-center gap-2 md:gap-4">
           <!-- Botão Principal com Degradê de Fogo (Laranja para Vermelho) -->
           <a
             href="https://wa.me/5591981992265?text=Ol%C3%A1%20Hugo%2C%20quero%20come%C3%A7ar%20agora%20na%20Mentoria%20de%20Neg%C3%B3cios"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >Começar Agora <span class="ml-1">&rarr;</span></a
+            class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold px-4 py-1.5 md:px-6 md:py-2.5 text-xs md:text-base rounded-full transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap"
+            >Começar <span class="hidden md:inline">Agora</span> <span class="ml-1">&rarr;</span></a
           >
-        </div>
 
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden text-slate-600 hover:text-orange-600 p-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-          </svg>
-        </button>
+          <!-- Mobile Menu Button -->
+          <button class="md:hidden text-slate-600 hover:text-orange-600 p-1" aria-label="Abrir menu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-7 h-7"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow w-full">
+    <main class="flex-grow w-full pt-[76px]">
       <slot />
     </main>
 
@@ -161,15 +170,18 @@ const { title, description, image, canonicalURL } = Astro.props;
       >
         <div class="col-span-1 md:col-span-2">
           <!-- Logo Otimizada no Footer -->
-          <a href="/" class="flex items-center mb-4">
-            <Image
-              src={logoImg}
-              alt="Logo Comunidade Ignição - Mentoria e Marketing de Rede"
-              width={140}
-              class="brightness-0 invert opacity-90"
+          <a href="/" class="flex items-center mb-6">
+            <OptimizedImage
+              src={logoSrc}
+              alt={siteConfig.name || "Logo do Site"}
+              class="w-[140px] h-auto object-contain brightness-0 invert opacity-90"
+              width={280}
+              loading="lazy"
             />
           </a>
-          <p class="text-slate-400 max-w-md" set:html={siteConfig.footer.description}></p>
+          <p class="text-slate-400 max-w-md">
+            {siteConfig.footerDescription || "Conectando talentos a mentores de alto impacto."}
+          </p>
         </div>
         <div>
           <h4
@@ -202,25 +214,30 @@ const { title, description, image, canonicalURL } = Astro.props;
           <h4
             class="text-white font-semibold mb-4 uppercase tracking-wider text-sm"
           >
-            Contato
+            LGPD & Políticas
           </h4>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2">
-              <span class="text-orange-400">&bull;</span> hugomurilosc@gmail.com
+            <li>
+              <a href="/privacidade" class="hover:text-orange-400 transition-colors"
+                >Política de Privacidade</a
+              >
             </li>
-            <li class="flex items-center gap-2">
-              <span class="text-emerald-400">&bull;</span> +55 (91) 98199-2265
+            <li>
+              <a href="/termos" class="hover:text-orange-400 transition-colors"
+                >Termos de Uso</a
+              >
             </li>
           </ul>
         </div>
       </div>
       <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-400"
       >
         <p>
-          &copy; {new Date().getFullYear()} {siteConfig.footer.copyright || "Ignição"}. Todos os direitos reservados.
+          &copy; {new Date().getFullYear()} Ignição. Todos os direitos reservados.
         </p>
       </div>
     </footer>
+    <BodyEndPlugins />
   </body>
 </html>

@@ -1,16 +1,25 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
+import react from '@astrojs/react';
+import tailwind from '@astrojs/tailwind';
 
-import tailwindcss from '@tailwindcss/vite';
-
-import sitemap from '@astrojs/sitemap';
-
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://comunidadeignicao.com.br',
-  vite: {
-    plugins: [tailwindcss()]
-  },
-
-  integrations: [sitemap()]
+    site: 'https://www.comunidadeignicao.com.br',
+    output: 'static',
+    adapter: vercel(),
+    integrations: [
+        react(),
+        tailwind({ applyBaseStyles: false }),
+    ],
+    vite: {
+        optimizeDeps: {
+            include: ['marked'],
+        },
+    },
+    image: {
+        domains: ['images.unsplash.com', 'unsplash.com', 'localhost'],
+    },
+    build: {
+        inlineStylesheets: 'always',
+    },
 });

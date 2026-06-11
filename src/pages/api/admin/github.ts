@@ -96,7 +96,7 @@ export const POST: APIRoute = async ({ request }) => {
         const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
         const GITHUB_OWNER = import.meta.env.GITHUB_OWNER;
         const GITHUB_REPO = import.meta.env.GITHUB_REPO;
-        const GITHUB_BASE_DIR = import.meta.env.GITHUB_BASE_DIR || 'cms-core';
+        const GITHUB_BASE_DIR = import.meta.env.GITHUB_BASE_DIR || '';
 
         // Modo dev: sem credenciais GitHub → usa filesystem local
         if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
