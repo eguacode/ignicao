@@ -3,6 +3,7 @@ import BaseSEO from "../components/BaseSEO.astro";
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import logoImg from "../assets/logo-ignicao.png";
+import siteConfig from "../../cms-core/src/data/siteConfig.json";
 
 interface Props {
   title: string;
@@ -168,11 +169,7 @@ const { title, description, image, canonicalURL } = Astro.props;
               class="brightness-0 invert opacity-90"
             />
           </a>
-          <p class="text-slate-400 max-w-md">
-            <strong class="text-orange-400">Ative sua melhor versão!</strong> Nossa
-            comunidade conecta talentos a mentores de alto impacto, accelerating careers
-            and building successful businesses.
-          </p>
+          <p class="text-slate-400 max-w-md" set:html={siteConfig.footer.description}></p>
         </div>
         <div>
           <h4
@@ -221,7 +218,7 @@ const { title, description, image, canonicalURL } = Astro.props;
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500"
       >
         <p>
-          &copy; {new Date().getFullYear()} Ignição. Todos os direitos reservados.
+          &copy; {new Date().getFullYear()} {siteConfig.footer.copyright || "Ignição"}. Todos os direitos reservados.
         </p>
       </div>
     </footer>
