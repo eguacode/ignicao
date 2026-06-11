@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.comunidadeignicao.com.br',
+  site: 'https://comunidadeignicao.com.br',
   vite: {
     plugins: [tailwindcss()]
   },
