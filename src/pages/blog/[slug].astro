@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 const post = Astro.props;
 const { Content } = await post.render();
 
-const currentAuthor = authorsData.find((a: any) => a.id === post.data.author) || authorsData[0] || {
+const currentAuthor = authorsData.find((a: any) => a.id === post.data.author || a.name === post.data.author) || authorsData[0] || {
   name: 'Equipe',
   role: 'Redação',
   avatar: '',
