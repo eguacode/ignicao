@@ -48,7 +48,7 @@ const siteConfig = readData('siteConfig.json', {}) as any;
 const fullPostUrl = `${siteConfig.url || Astro.url.origin}${postUrl(post.slug)}`;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} image={post.data.heroImage} type="article">
+<BaseLayout title={post.data.title} description={post.data.description} image={post.data.heroImage} type="article" author={currentAuthor?.name} pubDate={post.data.pubDate}>
   <PostSchemaPlugins
     title={post.data.title}
     description={post.data.description || ''}

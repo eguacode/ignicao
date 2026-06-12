@@ -4,6 +4,9 @@ interface Props {
   description: string;
   image?: string;
   canonicalURL?: string | URL;
+  type?: 'website' | 'article';
+  author?: string;
+  pubDate?: Date;
 }
 
 const {
@@ -11,6 +14,9 @@ const {
   description,
   image = '/social-image.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url),
+  type = 'website',
+  author,
+  pubDate,
 } = Astro.props;
 import { readData } from "../lib/readData";
 const siteConfig = readData('siteConfig.json', {});
@@ -33,7 +39,7 @@ const faviconSrc = siteConfig.favicon || "/favicon.svg";
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -49,9 +55,12 @@ const faviconSrc = siteConfig.favicon || "/favicon.svg";
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "WebSite",
+  "@type": type === 'article' ? 'Article' : 'WebSite',
   "url": canonicalURL,
   "name": title,
+  "headline": title,
   "description": description,
-  "image": new URL(image, Astro.site || Astro.url)
+  "image": new URL(image, Astro.site || Astro.url),
+  ...(author && { "author": { "@type": "Person", "name": author } }),
+  ...(pubDate && { "datePublished": new Date(pubDate).toISOString() })
 })} />
