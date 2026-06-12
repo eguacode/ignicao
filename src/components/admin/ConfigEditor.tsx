@@ -301,9 +301,9 @@ export default function ConfigEditor() {
                         <p className="text-xs text-emerald-600 mb-3">O sitemap é atualizado a cada build/deploy com todas as páginas e posts do site.</p>
                         {config?.url ? (
                             <div className="space-y-2">
-                                <a href={`${config.url.replace(/\/$/, '')}/sitemap-index.xml`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 bg-white px-4 py-2 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-colors">
+                                <a href={`${config.url.replace(/\/$/, '')}/sitemap.xml`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 bg-white px-4 py-2 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-colors">
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                                    {config.url.replace(/\/$/, '')}/sitemap-index.xml
+                                    {config.url.replace(/\/$/, '')}/sitemap.xml
                                 </a>
                                 <p className="text-xs text-slate-500">Use esta URL no Google Search Console para enviar seu sitemap.</p>
                             </div>
