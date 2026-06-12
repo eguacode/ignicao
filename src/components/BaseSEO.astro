@@ -45,3 +45,13 @@ const faviconSrc = siteConfig.favicon || "/favicon.svg";
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.site || Astro.url)} />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": canonicalURL,
+  "name": title,
+  "description": description,
+  "image": new URL(image, Astro.site || Astro.url)
+})} />
