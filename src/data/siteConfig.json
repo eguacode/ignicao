@@ -38,5 +38,6 @@
   "seo": {
     "title": "Comunidade Ignição | Marketing de Rede",
     "description": "Sistema de recrutamento de marketing de rede 100% gratuito e integrado com: landing pages, CRM, automação, funil de whatsapp, gestão e mais para você e sua equipe."
-  }
+  },
+  "postUrlPrefix": ""
 }
