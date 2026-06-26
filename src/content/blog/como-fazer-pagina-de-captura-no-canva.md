@@ -1,5 +1,5 @@
 ---
-title: "Como Fazer Página de Captura no Canva: Guia Completo Passo a Passo"
+title: "Como Fazer Página de Captura no Canva: Guia Passo a Passo"
 description: "Aprenda como fazer página de captura no Canva de forma prática e eficiente para aumentar suas conversões e captar leads qualificados."
 pubDate: "2026-06-26"
 heroImage: ""
