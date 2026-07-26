@@ -16,9 +16,9 @@ const { title = 'Admin', activeSection = '' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} — Admin</title>
-    <style>
+    <style is:global>
         /* Quill override */
-        .ql-toolbar { border-radius: 8px 8px 0 0 !important; border-color: #e2e8f0 !important; position: sticky !important; top: 0; z-index: 50; background-color: white !important; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); }
+        .ql-toolbar { border-radius: 8px 8px 0 0 !important; border-color: #e2e8f0 !important; position: sticky !important; top: 0 !important; z-index: 99 !important; background-color: white !important; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); }
         .ql-container { border-radius: 0 0 8px 8px !important; border-color: #e2e8f0 !important; min-height: 300px; }
         .ql-editor { font-size: 15px; line-height: 1.7; }
     </style>
