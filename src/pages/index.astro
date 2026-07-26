@@ -444,7 +444,7 @@ if (inspirationPosts.length === 0) inspirationPosts.push(...publishedPosts.slice
       </div>
       
       <div class="w-full relative px-4 sm:px-6 lg:px-8 max-w-[100vw]">
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 hide-scrollbar">
+        <div id="qualifications-slider" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 hide-scrollbar cursor-grab">
           {bannersConfig.map((banner: any) => (
             <div class="snap-center shrink-0 w-64 md:w-72 relative group transform transition-all hover:-translate-y-2">
               <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 group-hover:border-orange-500 transition-colors aspect-[9/16] bg-slate-800 relative">
@@ -466,6 +466,75 @@ if (inspirationPosts.length === 0) inspirationPosts.push(...publishedPosts.slice
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       </style>
+      
+      <script>
+        const slider = document.getElementById('qualifications-slider');
+        
+        if (slider) {
+          // Auto scroll logic
+          let autoScrollInterval;
+          
+          const startAutoScroll = () => {
+            autoScrollInterval = setInterval(() => {
+              const itemWidth = slider.children[0]?.clientWidth || 0;
+              const gap = 24; // 24px is the gap-6
+              
+              if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                // Reset to beginning
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+              } else {
+                slider.scrollBy({ left: itemWidth + gap, behavior: 'smooth' });
+              }
+            }, 3000); // 3 seconds interval
+          };
+
+          const stopAutoScroll = () => clearInterval(autoScrollInterval);
+
+          startAutoScroll();
+
+          // Pause auto-scroll on hover or touch
+          slider.addEventListener('mouseenter', stopAutoScroll);
+          slider.addEventListener('mouseleave', startAutoScroll);
+          slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
+          slider.addEventListener('touchend', startAutoScroll);
+
+          // Mouse drag logic
+          let isDown = false;
+          let startX;
+          let scrollLeft;
+
+          slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('cursor-grabbing');
+            slider.classList.remove('cursor-grab');
+            slider.style.scrollSnapType = 'none'; // temporary remove snap for free drag
+            slider.style.scrollBehavior = 'auto'; // disable smooth scroll during drag
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            stopAutoScroll();
+          });
+
+          const stopDrag = () => {
+            if(!isDown) return;
+            isDown = false;
+            slider.classList.add('cursor-grab');
+            slider.classList.remove('cursor-grabbing');
+            slider.style.scrollSnapType = ''; // restore snap
+            slider.style.scrollBehavior = ''; // restore smooth scroll behavior
+          };
+
+          slider.addEventListener('mouseleave', stopDrag);
+          slider.addEventListener('mouseup', stopDrag);
+
+          slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // scroll speed multiplier
+            slider.scrollLeft = scrollLeft - walk;
+          });
+        }
+      </script>
     </section>
   )}
   <!-- Em Alta -->
