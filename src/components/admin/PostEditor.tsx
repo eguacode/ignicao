@@ -214,7 +214,7 @@ export default function PostEditor({ filePath }: PostEditorProps) {
                                         [{ 'align': [] }],
                                         ['blockquote', 'code-block'],
                                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                        ['link', 'image'],
+                                        ['link', 'image', 'video'],
                                         ['clean']
                                     ]
                                 }}
