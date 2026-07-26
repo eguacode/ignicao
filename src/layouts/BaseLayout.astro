@@ -142,7 +142,7 @@ const { title, description, image, canonicalURL, type = 'website', author, pubDa
           >
 
           <!-- Mobile Menu Button -->
-          <button class="md:hidden text-slate-600 hover:text-orange-600 p-1" aria-label="Abrir menu">
+          <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-orange-600 p-1" aria-label="Abrir menu">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -159,7 +159,38 @@ const { title, description, image, canonicalURL, type = 'website', author, pubDa
           </button>
         </div>
       </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+        <nav class="flex flex-col px-4 py-4 space-y-4 font-medium text-slate-600">
+          <a href="/" class="hover:text-orange-600 transition-colors">Início</a>
+          <a href="/#about" class="hover:text-orange-600 transition-colors">Sobre Nós</a>
+          <a href="/#how-it-works" class="hover:text-orange-600 transition-colors">Como Funciona</a>
+          
+          <div class="flex flex-col space-y-2">
+            <span class="text-slate-900 font-semibold pt-2 border-t border-slate-100">Conteúdos</span>
+            <div class="flex flex-col pl-4 space-y-3 border-l-2 border-slate-100 mt-2">
+              <a href="/categoria/recrutamento" class="hover:text-orange-600 transition-colors text-sm">Recrutamento</a>
+              <a href="/categoria/lideranca" class="hover:text-orange-600 transition-colors text-sm">Liderança</a>
+              <a href="/categoria/vendas" class="hover:text-orange-600 transition-colors text-sm">Vendas</a>
+              <a href="/categoria/mentalidade" class="hover:text-orange-600 transition-colors text-sm">Mentalidade</a>
+              <a href="/blog" class="text-orange-600 font-bold hover:text-orange-700 transition-colors text-sm mt-1">Ver Todos os Artigos</a>
+            </div>
+          </div>
+          
+          <a href="/contato" class="hover:text-orange-600 transition-colors pt-2 border-t border-slate-100">Contato</a>
+        </nav>
+      </div>
     </header>
+
+    <script>
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+    </script>
 
     <!-- Main Content -->
     <main class="flex-grow w-full pt-[76px]">
