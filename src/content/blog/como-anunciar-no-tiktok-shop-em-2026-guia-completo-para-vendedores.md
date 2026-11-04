@@ -1,6 +1,6 @@
 ---
 title: "Como Anunciar no TikTok Shop: Guia Completo para Vendedores"
-description: "Aprenda como anunciar no TikTok Shop em 2026 com nosso guia completo. Dicas práticas para configurar, criar campanhas e vender mais na plataforma."
+description: "Aprenda como anunciar no TikTok Shop com nosso guia completo. Dicas práticas para configurar, criar campanhas e vender mais na plataforma."
 pubDate: "2026-11-04"
 heroImage: "https://btgaizddojvvnbwxdags.supabase.co/storage/v1/object/public/public/images/1793799941581_como_anunciar_no_tiktok_shop.jpg"
 category: "Vendas"
